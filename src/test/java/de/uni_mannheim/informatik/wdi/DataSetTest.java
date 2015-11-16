@@ -34,7 +34,6 @@ public class DataSetTest extends TestCase {
 		
 		assertEquals(151, ds.getRecords().size());
 		
-		//test commit
 /* example entry
 	<movie>
 		<id>actors_1</id>
