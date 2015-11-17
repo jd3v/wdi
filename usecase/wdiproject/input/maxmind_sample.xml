@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cities xsi:noNamespaceSchemaLocation="file:///C:/Users/Mats/Google%20Drive/WDI%20Project/integratedTargetSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<city>
+		<id>maxmind_city_4550</id>
+		<name>dubai</name>
+		<population>1137376</population>
+		<countrycode>ae</countrycode>
+		<lat>25.258172</lat>
+		<long>55.304717</long>
+	</city>
+		<city>
+		<id>maxmind_city_588</id>
+		<name>andira</name>
+		<population>20758</population>
+		<countrycode>br</countrycode>
+		<lat>-23.0488</lat>
+		<long>-50.2276</long>
+	</city>
+	<city>
+		<id>maxmind_city_589</id>
+		<name>andorra la vella</name>
+		<population>20430</population>
+		<countrycode>ad</countrycode>
+		<lat>42.5</lat>
+		<long>1.5166667</long>
+	</city>
+		<city>
+		<id>maxmind_city_9386</id>
+		<name>les escaldes</name>
+		<population>15854</population>
+		<countrycode>ad</countrycode>
+		<lat>42.5</lat>
+		<long>1.5333333</long>
+	</city>
+		<city>
+		<id>maxmind_city_9387</id>
+		<name>les lilas</name>
+		<population>20499</population>
+		<countrycode>fr</countrycode>
+		<lat>48.879918</lat>
+		<long>2.420573</long>
+	</city>
+	<city>
+		<id>maxmind_city_9388</id>
+		<name>les mureaux</name>
+		<population>31406</population>
+		<countrycode>fr</countrycode>
+		<lat>48.991733</lat>
+		<long>1.909718</long>
+	</city>
+</cities>
