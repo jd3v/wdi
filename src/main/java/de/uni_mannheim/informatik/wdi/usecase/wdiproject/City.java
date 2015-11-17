@@ -5,6 +5,8 @@ import de.uni_mannheim.informatik.wdi.Record;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.javadocmd.simplelatlng.LatLng;
+
 /**
  * Created by Mats on 15/11/15.
  */
@@ -21,6 +23,12 @@ public class City extends Record {
         super(identifier, provenance);
         musicians = new LinkedList<>();
     }
+    
+    public LatLng getLocation(){
+    	LatLng location = new LatLng(this.getLat(), this.getLon());
+    	return location;
+    }
+    
 
     public List<Musician> getMusicians() {
         return musicians;
