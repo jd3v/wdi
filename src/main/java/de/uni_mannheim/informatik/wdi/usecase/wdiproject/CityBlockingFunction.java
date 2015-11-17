@@ -6,7 +6,7 @@ public class CityBlockingFunction extends BlockingFunction<City> {
 
 	@Override
 	public String getBlockingKey(City instance) {
-		return instance.getName();				
+		return Double.toString(Math.round(instance.getLat())) + Double.toString(Math.round(instance.getLon()));				
 	}
 
 }
