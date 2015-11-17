@@ -7,7 +7,7 @@ import de.uni_mannheim.informatik.wdi.usecase.wdiproject.City;
 /**
  * Created by Mats on 15/11/15.
  */
-public class PopulationComparator extends Comparator<City> {
+public class CityPopulationComparator extends Comparator<City> {
 
     private PercentageSimilarity sim = new PercentageSimilarity(10);
 

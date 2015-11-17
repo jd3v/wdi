@@ -11,7 +11,6 @@ public class CityLocationComparator extends Comparator<City> {
 	@Override
 	public double compare(City one, City two) {
 		double similarity = sim.calculate(one.getLocation(), two.getLocation());
-		System.out.println("similarity:" + similarity);
 		return similarity;
 	}
 }

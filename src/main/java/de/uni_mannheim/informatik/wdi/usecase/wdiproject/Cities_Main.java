@@ -16,6 +16,7 @@ import de.uni_mannheim.informatik.wdi.identityresolution.matching.Correspondence
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.LinearCombinationMatchingRule;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.MatchingEngine;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityLocationComparator;
+import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityPopulationComparator;
 
 /**
  * Created by Mats on 15/11/15.
@@ -28,7 +29,8 @@ public class Cities_Main {
 		// define the matching rule
 		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(1, 1);
 //		rule.addComparator(new CityNameComparator(), 2);
-		rule.addComparator(new CityLocationComparator(), 2);
+		rule.addComparator(new CityLocationComparator(), 1);
+		rule.addComparator(new CityPopulationComparator(), 0);
 
 		// create the matching engine
 		Blocker<City> blocker = new PartitioningBlocker<>(new CityBlockingFunction());
@@ -52,7 +54,7 @@ public class Cities_Main {
 		// write the correspondences to the output file
 		engine.writeCorrespondences(correspondences,new File("usecase/wdiproject/output/Geonames_2_Maxmind_correspondences.csv"));
 
-//		printCorrespondences(correspondences);
+		printCorrespondences(correspondences);
 		
 //		// load the gold standard (training set)
 //		GoldStandard gsTraining = new GoldStandard();
@@ -85,34 +87,35 @@ public class Cities_Main {
 
 	private static void printCorrespondences(List<Correspondence<City>> correspondences) {
 		// sort the correspondences
+		
 //		Collections.sort(correspondences, new Comparator<Correspondence<City>>() {
 //
 //			@Override
 //			public int compare(Correspondence<City> o1, Correspondence<City> o2) {
 //				int score = Double.compare(o1.getSimilarityScore(), o2.getSimilarityScore());
-//				int title = o1.getFirstRecord().getTitle().compareTo(o2.getFirstRecord().getTitle());
-//
-//				if (score != 0) {
+//				int name = o1.getFirstRecord().getName().compareTo(o2.getFirstRecord().getName());
+//				
+//				if(score!=0) {
 //					return -score;
 //				} else {
-//					return title;
+//					return name;
 //				}
 //			}
 //
 //		});
-//
-//		// print the correspondences
-//		for (Correspondence<City> correspondence : correspondences) {
-//			if (correspondence.getSimilarityScore() < 1.0) {
-//				System.out.println(String.format("%s,%s,|\t\t%.2f\t[%s] %s (%s) <--> [%s] %s (%s)",
-//						correspondence.getFirstRecord().getIdentifier(),
-//						correspondence.getSecondRecord().getIdentifier(), correspondence.getSimilarityScore(),
-//						correspondence.getFirstRecord().getIdentifier(), correspondence.getFirstRecord().getTitle(),
-//						correspondence.getFirstRecord().getDate().toString("YYYY-MM-DD"),
-//						correspondence.getSecondRecord().getIdentifier(), correspondence.getSecondRecord().getTitle(),
-//						correspondence.getSecondRecord().getDate().toString("YYYY-MM-DD")));
-//			}
-//		}
+
+		// print the correspondences
+		for (Correspondence<City> correspondence : correspondences) {
+			if (correspondence.getSimilarityScore() > 1.0) {
+				System.out.println(String.format("%s,%s,|\t\t%.2f\t[%s] %s (%s) <--> [%s] %s (%s)",
+						correspondence.getFirstRecord().getIdentifier(),
+						correspondence.getSecondRecord().getIdentifier(), correspondence.getSimilarityScore(),
+						correspondence.getFirstRecord().getIdentifier(), correspondence.getFirstRecord().getName(),
+						correspondence.getFirstRecord().getPopulation(),
+						correspondence.getSecondRecord().getIdentifier(), correspondence.getSecondRecord().getName(),
+						correspondence.getSecondRecord().getPopulation()));
+			}
+		}
 	}
 
 }
