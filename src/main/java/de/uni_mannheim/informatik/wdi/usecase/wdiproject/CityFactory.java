@@ -21,7 +21,7 @@ public class CityFactory extends MatchableFactory<City> {
         city.setName(getValueFromChildElement(node, "name"));
         city.setCc(getValueFromChildElement(node, "countrycode"));
         city.setLat(Double.valueOf(getValueFromChildElement(node, "lat")));
-        city.setLon(Double.valueOf(getValueFromChildElement(node, "lon")));
+        city.setLon(Double.valueOf(getValueFromChildElement(node, "long")));
         city.setPopulation(Integer.valueOf(getValueFromChildElement(node, "population")));
 
         // load the list of actors
