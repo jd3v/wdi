@@ -24,7 +24,7 @@ public class CityFactory extends MatchableFactory<City> {
         city.setLon(Double.valueOf(getValueFromChildElement(node, "long")));
         city.setPopulation(Integer.valueOf(getValueFromChildElement(node, "population")));
 
-        // load the list of actors
+        // load the list of musicians
         List<Musician> musicians = getObjectListFromChildElement(node, "musicians", "musician", new MusicianFactory(), provenanceInfo);
         city.setMusicians(musicians);
 
