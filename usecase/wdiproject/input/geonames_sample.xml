@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cities xsi:noNamespaceSchemaLocation="file:///C:/Users/Mats/Google%20Drive/WDI%20Project/integratedTargetSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<city>
+		<id>geoname_city_1</id>
+		<name>les escaldes</name>
+		<population>15853</population>
+		<countrycode>ad</countrycode>
+		<lat>42.50729</lat>
+		<long>1.53414</long>
+	</city>
+	<city>
+		<id>geoname_city_2</id>
+		<name>andorra la vella</name>
+		<population>20430</population>
+		<countrycode>ad</countrycode>
+		<lat>42.50779</lat>
+		<long>1.52109</long>
+	</city>
+	<city>
+		<id>geoname_city_3</id>
+		<name>umm al qaywayn</name>
+		<population>44411</population>
+		<countrycode>ae</countrycode>
+		<lat>25.56473</lat>
+		<long>55.55517</long>
+	</city>
+	<city>
+		<id>geoname_city_4</id>
+		<name>ras al-khaimah</name>
+		<population>115949</population>
+		<countrycode>ae</countrycode>
+		<lat>25.78953</lat>
+		<long>55.9432</long>
+	</city>
+	<city>
+		<id>geoname_city_5</id>
+		<name>khawr fakkān</name>
+		<population>33575</population>
+		<countrycode>ae</countrycode>
+		<lat>25.33132</lat>
+		<long>56.34199</long>
+	</city>
+	<city>
+		<id>geoname_city_6</id>
+		<name>dubai</name>
+		<population>1137347</population>
+		<countrycode>ae</countrycode>
+		<lat>25.0657</lat>
+		<long>55.17128</long>
+	</city>
+</cities>
