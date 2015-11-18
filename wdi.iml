@@ -15,5 +15,6 @@
     <orderEntry type="library" name="Maven: com.wcohen.ss:secondstring:20120620" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.1" level="project" />
     <orderEntry type="library" name="Maven: net.sf.opencsv:opencsv:2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.javadocmd:simplelatlng:1.3.1" level="project" />
   </component>
 </module>
