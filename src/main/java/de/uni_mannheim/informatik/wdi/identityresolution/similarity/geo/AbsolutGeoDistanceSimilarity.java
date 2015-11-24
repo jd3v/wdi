@@ -19,6 +19,7 @@ public class AbsolutGeoDistanceSimilarity extends SimilarityMeasure<LatLng> {
 			return 0.0;
 		} else {
 			double distanceInKilometers = LatLngTool.distance(location1, location2, LengthUnit.KILOMETER);
+			System.out.println(distanceInKilometers);
 							
 			return distanceInKilometers;
 		}
