@@ -9,13 +9,13 @@ import de.uni_mannheim.informatik.wdi.usecase.wdiproject.City;
  */
 public class CityPopulationComparator extends Comparator<City> {
 
-    private PercentageSimilarity sim = new PercentageSimilarity(10);
+    private PercentageSimilarity sim = new PercentageSimilarity(0.05);
 
     @Override
     public double compare(City one, City two) {
 
-        double similarity = sim.calculate(Double.valueOf(one.getPopulation()), Double.valueOf(one.getPopulation()));
+        double similarity = sim.calculate(Double.valueOf(one.getPopulation()), Double.valueOf(two.getPopulation()));
 
-        return similarity * similarity;
+        return similarity;
     }
 }

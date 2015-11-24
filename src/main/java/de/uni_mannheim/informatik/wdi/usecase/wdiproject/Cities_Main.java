@@ -16,6 +16,7 @@ import de.uni_mannheim.informatik.wdi.identityresolution.matching.Correspondence
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.LinearCombinationMatchingRule;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.MatchingEngine;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityLocationComparator;
+import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparatorLevenshtein;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityPopulationComparator;
 
 /**
@@ -27,10 +28,10 @@ public class Cities_Main {
 			throws ParserConfigurationException, SAXException, XPathExpressionException, IOException {
 
 		// define the matching rule
-		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(1, 1);
-//		rule.addComparator(new CityNameComparator(), 2);
-		rule.addComparator(new CityLocationComparator(), 1);
-		rule.addComparator(new CityPopulationComparator(), 0);
+		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 1);
+		rule.addComparator(new CityNameComparatorLevenshtein(), 0.9);
+		rule.addComparator(new CityLocationComparator(), 0.2);
+		rule.addComparator(new CityPopulationComparator(), 0.2);
 
 		// create the matching engine
 		Blocker<City> blocker = new PartitioningBlocker<>(new CityBlockingFunction());
@@ -41,8 +42,8 @@ public class Cities_Main {
 		DataSet<City> maxmind = new DataSet<>();
 		DataSet<City> dbpCity = new DataSet<>();
 
-		geonames.loadFromXML(new File("usecase/wdiproject/input/geonames_sample.xml"), new CityFactory(), "/cities/city");
-		maxmind.loadFromXML(new File("usecase/wdiproject/input/maxmind_sample.xml"), new CityFactory(), "/cities/city");
+		geonames.loadFromXML(new File("usecase/wdiproject/input/geonames.xml"), new CityFactory(), "/cities/city");
+		maxmind.loadFromXML(new File("usecase/wdiproject/input/maxmind.xml"), new CityFactory(), "/cities/city");
 
 		// dbpCity.loadFromXML(
 		// new File("usecase/wdiproject/input/cities.xml"),
@@ -107,13 +108,18 @@ public class Cities_Main {
 		// print the correspondences
 		for (Correspondence<City> correspondence : correspondences) {
 			if (correspondence.getSimilarityScore() > 1.0) {
-				System.out.println(String.format("%s,%s,|\t\t%.2f\t[%s] %s (%s) <--> [%s] %s (%s)",
+				System.out.println(String.format("%s,%s,|\t\t%.2f\t[%s] %s (%s, %s, %s) <--> [%s] %s (%s, %s, %s)",
 						correspondence.getFirstRecord().getIdentifier(),
 						correspondence.getSecondRecord().getIdentifier(), correspondence.getSimilarityScore(),
 						correspondence.getFirstRecord().getIdentifier(), correspondence.getFirstRecord().getName(),
 						correspondence.getFirstRecord().getPopulation(),
+						correspondence.getFirstRecord().getLat(),
+						correspondence.getFirstRecord().getLon(),
 						correspondence.getSecondRecord().getIdentifier(), correspondence.getSecondRecord().getName(),
-						correspondence.getSecondRecord().getPopulation()));
+						correspondence.getSecondRecord().getPopulation(),
+						correspondence.getSecondRecord().getLat(),
+						correspondence.getSecondRecord().getLon()
+						));
 			}
 		}
 	}
