@@ -9,10 +9,9 @@ import de.uni_mannheim.informatik.wdi.identityresolution.evaluation.Performance;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.Correspondence;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.LinearCombinationMatchingRule;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.MatchingEngine;
-import de.uni_mannheim.informatik.wdi.identityresolution.model.DefaultRecord;
-import de.uni_mannheim.informatik.wdi.identityresolution.model.DefaultRecordCSVFormatter;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityLocationComparator;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparator;
+import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityPopulationComparator;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,10 +29,10 @@ public class Cities_Main {
 			throws ParserConfigurationException, SAXException, XPathExpressionException, IOException {
 
 		// define the matching rule
-		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(1, 1);
-		rule.addComparator(new CityNameComparator(), 1);
-		rule.addComparator(new CityLocationComparator(), 0.1);
-		// rule.addComparator(new CityPopulationComparator(), 1);
+		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 0.5);
+		rule.addComparator(new CityNameComparator(), 0.3);
+		rule.addComparator(new CityLocationComparator(), 0.9);
+		rule.addComparator(new CityPopulationComparator(), 0.1);
 
 		// create the matching engine
 		Blocker<City> blocker = new PartitioningBlocker<>(new CityBlockingFunction());
@@ -46,37 +45,38 @@ public class Cities_Main {
 
 		geonames.loadFromXML(new File("usecase/wdiproject/input/geonames.xml"), new CityFactory(), "/cities/city");
 		maxmind.loadFromXML(new File("usecase/wdiproject/input/maxmind.xml"), new CityFactory(), "/cities/city");
+		dbpCity.loadFromXML(new File("usecase/wdiproject/input/cities_v3.xml"), new CityFactory(), "/cities/city");
 
 		// dbpCity.loadFromXML(
 		// new File("usecase/wdiproject/input/cities.xml"),
 		// new CityFactory(), "/cities/city");
 
 		// run the matching
-		List<Correspondence<City>> correspondences = engine.runMatching(geonames, maxmind);
+		List<Correspondence<City>> correspondences = engine.runMatching(geonames, dbpCity);
 
 		// write the correspondences to the output file
 		engine.writeCorrespondences(correspondences,
-				new File("usecase/wdiproject/output/Geonames_2_Maxmind_correspondences.csv"));
+				new File("usecase/wdiproject/output/Geonames_2_DBpedia_correspondences.csv"));
 
-		printCorrespondences(correspondences);
+		//printCorrespondences(correspondences);
 
 		// load the gold standard (training set)
 		GoldStandard gsTraining = new GoldStandard();
-		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2maxmind.csv"));
+		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2dbpedia.csv"));
 
 		// create the data set for learning a matching rule (use this file in
 		// RapidMiner)
-		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, maxmind, gsTraining);
-		features.writeCSV(new File("usecase/wdiproject/output/optimisation/geonames2maxmind.csv"),
-				new DefaultRecordCSVFormatter());
+//		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, maxmind, gsTraining);
+//		features.writeCSV(new File("usecase/wdiproject/output/optimisation/geonames2maxmind.csv"),
+//				new DefaultRecordCSVFormatter());
 
 		// load the gold standard (test set)
-		GoldStandard gsTest = new GoldStandard();
-		gsTest.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/Geonames_2_Maxmind_correspondences.csv"));
+//		GoldStandard gsTest = new GoldStandard();
+//		gsTest.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/Geonames_2_Maxmind_correspondences.csv"));
 
 		// evaluate the result
 		MatchingEvaluator<City> evaluator = new MatchingEvaluator<>(true);
-		Performance perfTest = evaluator.evaluateMatching(correspondences, gsTest);
+		Performance perfTest = evaluator.evaluateMatching(correspondences, gsTraining);
 
 		// print the evaluation result
 		System.out.println(String.format("Precision: %.4f\nRecall: %.4f\nF1: %.4f", perfTest.getPrecision(),
