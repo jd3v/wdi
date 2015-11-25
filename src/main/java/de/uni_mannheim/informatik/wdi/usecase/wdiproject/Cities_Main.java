@@ -1,14 +1,5 @@
 package de.uni_mannheim.informatik.wdi.usecase.wdiproject;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-
-import org.xml.sax.SAXException;
-
 import de.uni_mannheim.informatik.wdi.DataSet;
 import de.uni_mannheim.informatik.wdi.identityresolution.blocking.Blocker;
 import de.uni_mannheim.informatik.wdi.identityresolution.blocking.PartitioningBlocker;
@@ -20,14 +11,15 @@ import de.uni_mannheim.informatik.wdi.identityresolution.matching.LinearCombinat
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.MatchingEngine;
 import de.uni_mannheim.informatik.wdi.identityresolution.model.DefaultRecord;
 import de.uni_mannheim.informatik.wdi.identityresolution.model.DefaultRecordCSVFormatter;
-import de.uni_mannheim.informatik.wdi.usecase.movies.Movie;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityLocationComparator;
-<<<<<<< HEAD
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparator;
-=======
-import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparatorLevenshtein;
-import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityPopulationComparator;
->>>>>>> 2de1e6869c5ab37b826a520c3d5fd43aa4fe2f13
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Mats on 15/11/15.
@@ -38,17 +30,10 @@ public class Cities_Main {
 			throws ParserConfigurationException, SAXException, XPathExpressionException, IOException {
 
 		// define the matching rule
-<<<<<<< HEAD
 		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(1, 1);
 		rule.addComparator(new CityNameComparator(), 1);
 		rule.addComparator(new CityLocationComparator(), 0.1);
 		// rule.addComparator(new CityPopulationComparator(), 1);
-=======
-		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 1);
-		rule.addComparator(new CityNameComparatorLevenshtein(), 0.9);
-		rule.addComparator(new CityLocationComparator(), 0.2);
-		rule.addComparator(new CityPopulationComparator(), 0.2);
->>>>>>> 2de1e6869c5ab37b826a520c3d5fd43aa4fe2f13
 
 		// create the matching engine
 		Blocker<City> blocker = new PartitioningBlocker<>(new CityBlockingFunction());
@@ -59,12 +44,7 @@ public class Cities_Main {
 		DataSet<City> maxmind = new DataSet<>();
 		DataSet<City> dbpCity = new DataSet<>();
 
-<<<<<<< HEAD
-		geonames.loadFromXML(new File("usecase/wdiproject/input/geonames.xml"), new CityFactory(),
-				"/cities/city");
-=======
 		geonames.loadFromXML(new File("usecase/wdiproject/input/geonames.xml"), new CityFactory(), "/cities/city");
->>>>>>> 2de1e6869c5ab37b826a520c3d5fd43aa4fe2f13
 		maxmind.loadFromXML(new File("usecase/wdiproject/input/maxmind.xml"), new CityFactory(), "/cities/city");
 
 		// dbpCity.loadFromXML(
@@ -130,20 +110,6 @@ public class Cities_Main {
 		// print the correspondences
 		for (Correspondence<City> correspondence : correspondences) {
 			if (correspondence.getSimilarityScore() > 1.0) {
-<<<<<<< HEAD
-				System.out
-						.println(
-								String.format("%s,%s,|\t\t%.2f\t[%s] %s (%s) <--> [%s] %s (%s)",
-										correspondence.getFirstRecord().getIdentifier(),
-										correspondence.getSecondRecord().getIdentifier(), correspondence
-												.getSimilarityScore(),
-										correspondence.getFirstRecord().getIdentifier(),
-										correspondence.getFirstRecord().getName(),
-										correspondence.getFirstRecord().getPopulation(),
-										correspondence.getSecondRecord().getIdentifier(),
-										correspondence.getSecondRecord().getName(),
-										correspondence.getSecondRecord().getPopulation()));
-=======
 				System.out.println(String.format("%s,%s,|\t\t%.2f\t[%s] %s (%s, %s, %s) <--> [%s] %s (%s, %s, %s)",
 						correspondence.getFirstRecord().getIdentifier(),
 						correspondence.getSecondRecord().getIdentifier(), correspondence.getSimilarityScore(),
@@ -156,7 +122,6 @@ public class Cities_Main {
 						correspondence.getSecondRecord().getLat(),
 						correspondence.getSecondRecord().getLon()
 						));
->>>>>>> 2de1e6869c5ab37b826a520c3d5fd43aa4fe2f13
 			}
 		}
 	}
