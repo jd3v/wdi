@@ -80,3 +80,17 @@ geoname_city_22208,maxmind_city_4678,true
 geoname_city_22297,maxmind_city_9686,true
 geoname_city_22208,maxmind_city_9686,false
 geoname_city_22297,maxmind_city_4678,false
+geoname_city_6,maxmind_city_4550,true
+geoname_city_9,maxmind_city_15669,true
+geoname_city_6,maxmind_city_15669,false
+geoname_city_9,maxmind_city_4550,false
+geoname_city_13,maxmind_city_15669,false
+geoname_city_13,maxmind_city_4550,false
+geoname_city_12377,maxmind_city_17280,true
+geoname_city_19302,maxmind_city_7136,true
+geoname_city_701,maxmind_city_4304,true
+geoname_city_701,maxmind_city_4305,false
+geoname_city_702,maxmind_city_3415,true
+geoname_city_8902,maxmind_city_3827,true
+geoname_city_4750,maxmind_city_10004,true
+geoname_city_18305,maxmind_city_9521,true
