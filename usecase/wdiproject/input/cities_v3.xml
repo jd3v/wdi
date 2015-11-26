@@ -212,7 +212,7 @@
 		<id>dbpedia-city27</id>
 		<name>quatre bornes</name>
 		<population>82545</population>
-		<countrycode>230</countrycode>
+		<countrycode>mu</countrycode>
 		<lat>-20.2654</lat>
 		<long>57.4791</long>
 	</city>
@@ -5532,7 +5532,7 @@
 		<id>dbpedia-city692</id>
 		<name>almolonga</name>
 		<population>16850</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.8122</lat>
 		<long>-91.4944</long>
 	</city>
@@ -13268,7 +13268,7 @@
 		<id>dbpedia-city1659</id>
 		<name>san juan ostuncalco</name>
 		<population>29000</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.8667</lat>
 		<long>-91.6167</long>
 	</city>
@@ -16268,7 +16268,7 @@
 		<id>dbpedia-city2034</id>
 		<name>suva</name>
 		<population>88271</population>
-		<countrycode>679</countrycode>
+		<countrycode>fji</countrycode>
 		<lat>-18.1416</lat>
 		<long>178.442</long>
 	</city>
@@ -20204,7 +20204,7 @@
 		<id>dbpedia-city2526</id>
 		<name>quetzaltenango</name>
 		<population>225000</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.8444</lat>
 		<long>-91.5167</long>
 	</city>
@@ -22036,7 +22036,7 @@
 		<id>dbpedia-city2755</id>
 		<name>puerto barrios</name>
 		<population>40900</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>15.7167</lat>
 		<long>-88.5833</long>
 	</city>
@@ -23108,7 +23108,7 @@
 		<id>dbpedia-city2889</id>
 		<name>san felipe</name>
 		<population>17268</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.6206</lat>
 		<long>-91.5961</long>
 	</city>
@@ -28052,7 +28052,7 @@
 		<id>dbpedia-city3507</id>
 		<name>panajachel</name>
 		<population>11142</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.7406</lat>
 		<long>-91.1594</long>
 	</city>
@@ -31172,7 +31172,7 @@
 		<id>dbpedia-city3897</id>
 		<name>beau-bassin rose-hill</name>
 		<population>111355</population>
-		<countrycode>230</countrycode>
+		<countrycode>mu</countrycode>
 		<lat>-20.2398</lat>
 		<long>57.4717</long>
 	</city>
@@ -31468,7 +31468,7 @@
 		<id>dbpedia-city3934</id>
 		<name>coatepeque</name>
 		<population>41294</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.7</lat>
 		<long>-91.8667</long>
 	</city>
@@ -39324,7 +39324,7 @@
 		<id>dbpedia-city4916</id>
 		<name>retalhuleu</name>
 		<population>40000</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.5333</lat>
 		<long>-91.6833</long>
 	</city>
@@ -47524,7 +47524,7 @@
 		<id>dbpedia-city5941</id>
 		<name>san miguel</name>
 		<population>183733</population>
-		<countrycode>5</countrycode>
+		<countrycode>sv</countrycode>
 		<lat>13.4814</lat>
 		<long>-88.1775</long>
 	</city>
@@ -48308,7 +48308,7 @@
 		<id>dbpedia-city6039</id>
 		<name>zaragoza</name>
 		<population>17908</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.65</lat>
 		<long>-90.8833</long>
 	</city>
@@ -61388,7 +61388,7 @@
 		<id>dbpedia-city7674</id>
 		<name>guatemala city</name>
 		<population>2110100</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.6333</lat>
 		<long>-90.55</long>
 	</city>
@@ -70428,7 +70428,7 @@
 		<id>dbpedia-city8804</id>
 		<name>vacoas-phoenix</name>
 		<population>109136</population>
-		<countrycode>230</countrycode>
+		<countrycode>mu</countrycode>
 		<lat>-20.3</lat>
 		<long>57.4745</long>
 	</city>
@@ -77556,7 +77556,7 @@
 		<id>dbpedia-city9695</id>
 		<name>curepipe</name>
 		<population>85049</population>
-		<countrycode>230</countrycode>
+		<countrycode>mu</countrycode>
 		<lat>-20.3188</lat>
 		<long>57.5263</long>
 	</city>
@@ -83052,7 +83052,7 @@
 		<id>dbpedia-city10382</id>
 		<name>cantel</name>
 		<population>32221</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.8112</lat>
 		<long>-91.4555</long>
 	</city>
@@ -83532,7 +83532,7 @@
 		<id>dbpedia-city10442</id>
 		<name>ciudad vieja</name>
 		<population>25696</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.5233</lat>
 		<long>-90.7667</long>
 	</city>
@@ -89228,7 +89228,7 @@
 		<id>dbpedia-city11154</id>
 		<name>san carlos sija</name>
 		<population>31000</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.9833</lat>
 		<long>-91.55</long>
 	</city>
@@ -91044,7 +91044,7 @@
 		<id>dbpedia-city11381</id>
 		<name>alotenango</name>
 		<population>15848</population>
-		<countrycode>502</countrycode>
+		<countrycode>gt</countrycode>
 		<lat>14.4878</lat>
 		<long>-90.8058</long>
 	</city>
@@ -95436,7 +95436,7 @@
 		<id>dbpedia-city11930</id>
 		<name>sonsonate</name>
 		<population>71541</population>
-		<countrycode>5</countrycode>
+		<countrycode>sv</countrycode>
 		<lat>13.7167</lat>
 		<long>-89.7167</long>
 	</city>
@@ -104972,7 +104972,7 @@
 		<id>dbpedia-city13122</id>
 		<name>port louis</name>
 		<population>148001</population>
-		<countrycode>230</countrycode>
+		<countrycode>mu</countrycode>
 		<lat>-20.1644</lat>
 		<long>57.5041</long>
 	</city>
