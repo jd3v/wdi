@@ -37,6 +37,7 @@ geoname_city_22208,dbpedia-city5295,false
 geoname_city_22297,dbpedia-city5295,true
 geoname_city_6,dbpedia-city7166,true
 geoname_city_12377,dbpedia-city7459,true
+geoname_city_2,dbpedia-city2,false
 geoname_city_12399,dbpedia-city7459,false
 geoname_city_701,dbpedia-city4960,true
 geoname_city_701,dbpedia-city3197,false
@@ -47,12 +48,9 @@ geoname_city_2361,dbpedia-city3857,false
 geoname_city_20980,dbpedia-city14658,false
 geoname_city_21342,dbpedia-city14658,false
 geoname_city_21019,dbpedia-city14658,false
-geoname_city_21019,,dbpedia-city14658,false
 geoname_city_20968,dbpedia-city12120,true
 geoname_city_20968,dbpedia-city14658,false
-geoname_city_20968,dbpedia-city14658,false
 geoname_city_21000,dbpedia-city3326,true
-geoname_city_20968,dbpedia-city14658,false
 geoname_city_21000,dbpedia-city14658,false
 geoname_city_21608,dbpedia-city10894,true
 geoname_city_21608,dbpedia-city8234,false
@@ -73,6 +71,7 @@ geoname_city_19976,dbpedia-city65,false
 geoname_city_19976,dbpedia-city756,false
 geoname_city_19976,dbpedia-city1519,false
 geoname_city_19976,dbpedia-city7569,true
+geoname_city_1,dbpedia-city1,false
 geoname_city_1027,dbpedia-city5252,false
 geoname_city_1027,dbpedia-city5700,false
 geoname_city_9325,dbpedia-city5701,true
@@ -98,3 +97,4 @@ geoname_city_12571,dbpedia-city14035,false
 geoname_city_12575,dbpedia-city14036,false
 geoname_city_22438,dbpedia-city2316,true
 geoname_city_22437,dbpedia-city3295,true
+geoname_city_49,dbpedia-city7239,true
