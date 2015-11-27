@@ -11,11 +11,14 @@ import de.uni_mannheim.informatik.wdi.identityresolution.matching.LinearCombinat
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.MatchingEngine;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityLocationComparator;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparator;
+import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparatorJaro;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityPopulationComparator;
+
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -29,10 +32,10 @@ public class Cities_Main {
 			throws ParserConfigurationException, SAXException, XPathExpressionException, IOException {
 
 		// define the matching rule
-		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 0.5);
-		rule.addComparator(new CityNameComparator(), 0.3);
-		rule.addComparator(new CityLocationComparator(), 0.9);
-		rule.addComparator(new CityPopulationComparator(), 0.1);
+		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 0.7);
+		rule.addComparator(new CityNameComparatorJaro(), 0.5);
+		rule.addComparator(new CityLocationComparator(), 0.5);
+		rule.addComparator(new CityPopulationComparator(), 0.8);
 
 		// create the matching engine
 		Blocker<City> blocker = new PartitioningBlocker<>(new CityBlockingFunction());
@@ -52,17 +55,25 @@ public class Cities_Main {
 		// new CityFactory(), "/cities/city");
 
 		// run the matching
-		List<Correspondence<City>> correspondences = engine.runMatching(geonames, dbpCity);
+//		List<Correspondence<City>> correspondences = engine.runMatching(geonames, maxmind);
+//		List<Correspondence<City>> correspondences = engine.runMatching(geonames, dbpCity);
+		List<Correspondence<City>> correspondences = engine.runMatching(maxmind, dbpCity);
 
+		
 		// write the correspondences to the output file
 		engine.writeCorrespondences(correspondences,
-				new File("usecase/wdiproject/output/Geonames_2_DBpedia_correspondences.csv"));
+//				new File("usecase/wdiproject/output/Geonames_2_Maxmind_correspondences.csv"));
+//				new File("usecase/wdiproject/output/Geonames_2_DBpedia_correspondences.csv"));
+				new File("usecase/wdiproject/output/Maxmind_2_DBpedia_correspondences.csv"));
 
 		//printCorrespondences(correspondences);
 
 		// load the gold standard (training set)
 		GoldStandard gsTraining = new GoldStandard();
-		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2dbpedia.csv"));
+//		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2maxmind.csv"));
+//		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2dbpedia.csv"));
+		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_maxmind2dbpedia.csv"));
+
 
 		// create the data set for learning a matching rule (use this file in
 		// RapidMiner)
