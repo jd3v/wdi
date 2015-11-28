@@ -77,7 +77,6 @@ public class PartitioningBlocker<RecordType extends Matchable> extends Blocker<R
 			arrayIndex = treeSetArray.indexOf(key1);
 		   
 			   for (int j = arrayIndex; j < arrayIndex + halfWindowSize + sameDatasetCounter; j++) {
-			   
 				   if (j<treeSetArray.size()) {					   
 					   Double key2 = treeSetArray.get(j);
 					   
@@ -112,10 +111,6 @@ public class PartitioningBlocker<RecordType extends Matchable> extends Blocker<R
 			   }
 			}
 		}
-		
-
-		
-		
 		
 //		for(RecordType r1 : dataset1.getRecords()) {
 //			String key1 = blockingFunction.getBlockingKey(r1);

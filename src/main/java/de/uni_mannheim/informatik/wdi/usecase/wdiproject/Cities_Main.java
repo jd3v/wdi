@@ -9,6 +9,8 @@ import de.uni_mannheim.informatik.wdi.identityresolution.evaluation.Performance;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.Correspondence;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.LinearCombinationMatchingRule;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.MatchingEngine;
+import de.uni_mannheim.informatik.wdi.identityresolution.model.DefaultRecord;
+import de.uni_mannheim.informatik.wdi.identityresolution.model.DefaultRecordCSVFormatter;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityLocationComparator;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparator;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparatorJaro;
@@ -50,35 +52,37 @@ public class Cities_Main {
 		maxmind.loadFromXML(new File("usecase/wdiproject/input/maxmind.xml"), new CityFactory(), "/cities/city");
 		dbpCity.loadFromXML(new File("usecase/wdiproject/input/cities_v3.xml"), new CityFactory(), "/cities/city");
 
-		// dbpCity.loadFromXML(
-		// new File("usecase/wdiproject/input/cities.xml"),
-		// new CityFactory(), "/cities/city");
-
 		// run the matching
-//		List<Correspondence<City>> correspondences = engine.runMatching(geonames, maxmind);
+		List<Correspondence<City>> correspondences = engine.runMatching(geonames, maxmind);
 //		List<Correspondence<City>> correspondences = engine.runMatching(geonames, dbpCity);
-		List<Correspondence<City>> correspondences = engine.runMatching(maxmind, dbpCity);
+//		List<Correspondence<City>> correspondences = engine.runMatching(maxmind, dbpCity);
 
 		
 		// write the correspondences to the output file
 		engine.writeCorrespondences(correspondences,
-//				new File("usecase/wdiproject/output/Geonames_2_Maxmind_correspondences.csv"));
+				new File("usecase/wdiproject/output/Geonames_2_Maxmind_correspondences.csv"));
 //				new File("usecase/wdiproject/output/Geonames_2_DBpedia_correspondences.csv"));
-				new File("usecase/wdiproject/output/Maxmind_2_DBpedia_correspondences.csv"));
+//				new File("usecase/wdiproject/output/Maxmind_2_DBpedia_correspondences.csv"));
 
 		//printCorrespondences(correspondences);
 
 		// load the gold standard (training set)
 		GoldStandard gsTraining = new GoldStandard();
-//		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2maxmind.csv"));
+		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2maxmind.csv"));
 //		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2dbpedia.csv"));
-		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_maxmind2dbpedia.csv"));
+//		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_maxmind2dbpedia.csv"));
 
 
 		// create the data set for learning a matching rule (use this file in
 		// RapidMiner)
-//		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, maxmind, gsTraining);
-//		features.writeCSV(new File("usecase/wdiproject/output/optimisation/geonames2maxmind.csv"),
+		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, maxmind, gsTraining);
+		features.writeCSV(new File("usecase/wdiproject/output/optimisation/RP_geonames2maxmind.csv"),
+				new DefaultRecordCSVFormatter());
+//		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, dbpCity, gsTraining);
+//		features.writeCSV(new File("usecase/wdiproject/output/optimisation/RP_geonames2dbpedia.csv"),
+//				new DefaultRecordCSVFormatter());
+//		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(maxmind, dbpCity, gsTraining);
+//		features.writeCSV(new File("usecase/wdiproject/output/optimisation/RP_maxmind2dbpedia.csv"),
 //				new DefaultRecordCSVFormatter());
 
 		// load the gold standard (test set)

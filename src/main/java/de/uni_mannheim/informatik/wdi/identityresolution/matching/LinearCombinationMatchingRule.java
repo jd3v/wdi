@@ -60,7 +60,6 @@ public class LinearCombinationMatchingRule<RecordType extends Matchable> extends
 			
 			sum += (similarity * weight);
 		}
-		
 		return sum;
 	}
 
