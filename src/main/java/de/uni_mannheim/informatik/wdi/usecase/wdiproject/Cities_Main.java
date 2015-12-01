@@ -34,7 +34,7 @@ public class Cities_Main {
 			throws ParserConfigurationException, SAXException, XPathExpressionException, IOException {
 
 		// define the matching rule
-		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 0.7);
+		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 1.6);
 		rule.addComparator(new CityNameComparatorJaro(), 0.5);
 		rule.addComparator(new CityLocationComparator(), 0.5);
 		rule.addComparator(new CityPopulationComparator(), 0.8);
