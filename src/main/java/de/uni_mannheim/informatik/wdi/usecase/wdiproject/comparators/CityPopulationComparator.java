@@ -9,7 +9,7 @@ import de.uni_mannheim.informatik.wdi.usecase.wdiproject.City;
  */
 public class CityPopulationComparator extends Comparator<City> {
 
-    private PercentageSimilarity sim = new PercentageSimilarity(0.05);
+    private PercentageSimilarity sim = new PercentageSimilarity(0.9);
 
     @Override
     public double compare(City one, City two) {

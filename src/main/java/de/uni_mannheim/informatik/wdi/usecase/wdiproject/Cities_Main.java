@@ -35,26 +35,33 @@ public class Cities_Main {
 
 		// define the matching rule
 		
-		//geonames2maxmind rapidminer weights
-		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.544, -0.35); //rapidminer offset
-//		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.36, 0); //updated offset
-		rule.addComparator(new CityNameComparatorJaro(), 0.697);
-		rule.addComparator(new CityLocationComparator(), 0.651);
-		rule.addComparator(new CityPopulationComparator(), 0.217);
+//		//user-defined weights
+//		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 0.9); //rapidminer offset
+////		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.36, 0); //updated offset
+////		rule.addComparator(new CityNameComparatorJaro(), 0.8);
+//		rule.addComparator(new CityLocationComparator(), 0.8);
+//		rule.addComparator(new CityPopulationComparator(), 0.2);
 		
-//		//geonames2dbpCity rapidminer weights
-//		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.148, -0.258); //rapidminer offset
-////		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-0.89, 0);  //updated offset
+//		//geonames2maxmind rapidminer weights
+//		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.544, -0.35); //rapidminer offset, user defined threshold: -0.35
+////		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.36, 0); //updated offset
+//		rule.addComparator(new CityNameComparatorJaro(), 0.697);
+//		rule.addComparator(new CityLocationComparator(), 0.651);
+//		rule.addComparator(new CityPopulationComparator(), 0.217);
+//		
+//	geonames2dbpCity rapidminer weights
+//		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.148, -0.258); //rapidminer offset, user defined threshold: -0.258
+////	LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-0.89, 0);  //updated offset
 //		rule.addComparator(new CityNameComparatorJaro(), 0.26);
 //		rule.addComparator(new CityLocationComparator(), 0.838);
 //		rule.addComparator(new CityPopulationComparator(), 0.092);
 		
 //		//maxmind2dbpCity rapidminer weights
-//		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.261, -0.321); //rapidminer offset
-////	LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-0.94, 0);  //updated offset
-//		rule.addComparator(new CityNameComparatorJaro(), 0.373);
-//		rule.addComparator(new CityLocationComparator(), 0.831);
-//		rule.addComparator(new CityPopulationComparator(), 0.148);
+		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.261, -0.321); //rapidminer offset, user defined threshold: -0.321
+//		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-0.94, 0);  //updated offset
+		rule.addComparator(new CityNameComparatorJaro(), 0.373);
+		rule.addComparator(new CityLocationComparator(), 0.831);
+		rule.addComparator(new CityPopulationComparator(), 0.148);
 
 		
 //		//musician2fusedCities
@@ -71,50 +78,62 @@ public class Cities_Main {
 		DataSet<City> maxmind = new DataSet<>();
 		DataSet<City> dbpCity = new DataSet<>();
 		DataSet<City> fusedCities = new DataSet<>();
-		DataSet<City> musicians = new DataSet<>();
+//		DataSet<City> musicians = new DataSet<>();
 
 
 		geonames.loadFromXML(new File("usecase/wdiproject/input/geonames.xml"), new CityFactory(), "/cities/city");
 		maxmind.loadFromXML(new File("usecase/wdiproject/input/maxmind.xml"), new CityFactory(), "/cities/city");
-		dbpCity.loadFromXML(new File("usecase/wdiproject/input/cities_v3.xml"), new CityFactory(), "/cities/city");
+		dbpCity.loadFromXML(new File("usecase/wdiproject/input/cities_v5.xml"), new CityFactory(), "/cities/city");
 		fusedCities.loadFromXML(new File("usecase/wdiproject/input/fusedCities_draft.xml"), new CityFactory(), "/cities/city");
 //		musicians.loadFromXML(new File("usecase/wdiproject/input/musicians_v6_poc.xml"), new CityFactory(),"/cities/city");
 		
 		// run the matching
-		List<Correspondence<City>> correspondences = engine.runMatching(geonames, maxmind);
+//		List<Correspondence<City>> correspondences = engine.runMatching(geonames, maxmind);
 //		List<Correspondence<City>> correspondences = engine.runMatching(geonames, dbpCity);
-//		List<Correspondence<City>> correspondences = engine.runMatching(maxmind, dbpCity);
+		List<Correspondence<City>> correspondences = engine.runMatching(maxmind, dbpCity);
 //		List<Correspondence<City>> correspondences = engine.runMatching(fusedCities, musicians);
 
 
 		
 		// write the correspondences to the output file
 		engine.writeCorrespondences(correspondences,
-				new File("usecase/wdiproject/output/geonames2maxmind_correspondences_rm_weights.csv"));
+//				new File("usecase/wdiproject/output/geonames2maxmind_correspondences_rm_weights.csv"));
+//				new File("usecase/wdiproject/output/geonames2maxmind_correspondences_rm_weights_lat_w30.csv"));
+//				new File("usecase/wdiproject/output/geonames2maxmind_correspondences_rm_weights_lon_w30.csv"));
+		
 //				new File("usecase/wdiproject/output/geonames2dbpedia_correspondences_rm_weights.csv"));
+//				new File("usecase/wdiproject/output/geonames2dbpedia_correspondences_rm_weights_lat_w30_v5.csv"));
+//				new File("usecase/wdiproject/output/geonames2dbpedia_correspondences_rm_weights_lon_w30_v5.csv"));
+
+		
 //				new File("usecase/wdiproject/output/maxmind2dbpedia_correspondences_rm_weights.csv"));
+//				new File("usecase/wdiproject/output/maxmind2dbpedia_correspondences_rm_weights_lat_w30_v5.csv"));
+				new File("usecase/wdiproject/output/maxmind2dbpedia_correspondences_rm_weights_lon_w30_v5.csv"));
+
 //				new File("usecase/wdiproject/output/musicians2fusedCities_correspondences.csv"));
+//				new File("usecase/wdiproject/output/musicians2fusedCities_correspondences_lat_w30.csv"));
+//				new File("usecase/wdiproject/output/musicians2fusedCities_correspondences_lon_w30.csv"));
 
 		//printCorrespondences(correspondences);
 
 		// load the gold standard (training set)
 		GoldStandard gsTraining = new GoldStandard();
-		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2maxmind.csv"));
+//		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2maxmind.csv"));
 //		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2dbpedia.csv"));
-//		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_maxmind2dbpedia.csv"));
+		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_maxmind2dbpedia.csv"));
 
 
 		// create the data set for learning a matching rule (use this file in
 		// RapidMiner)
-		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, maxmind, gsTraining);
-		features.writeCSV(new File("usecase/wdiproject/output/optimisation/rm_geonames2maxmind.csv"),
-				new DefaultRecordCSVFormatter());
+//		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, maxmind, gsTraining);
+//		features.writeCSV(new File("usecase/wdiproject/output/optimisation/rm_geonames2maxmind.csv"),
+//				new DefaultRecordCSVFormatter());
 //		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, dbpCity, gsTraining);
 //		features.writeCSV(new File("usecase/wdiproject/output/optimisation/rm_geonames2dbpedia.csv"),
 //				new DefaultRecordCSVFormatter());
-//		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(maxmind, dbpCity, gsTraining);
-//		features.writeCSV(new File("usecase/wdiproject/output/optimisation/rm_maxmind2dbpedia.csv"),
-//				new DefaultRecordCSVFormatter());
+		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(maxmind, dbpCity, gsTraining);
+		features.writeCSV(new File("usecase/wdiproject/output/optimisation/rm_maxmind2dbpedia.csv"),
+				new DefaultRecordCSVFormatter());
 
 		// load the gold standard (test set)
 //		GoldStandard gsTest = new GoldStandard();

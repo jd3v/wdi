@@ -29,7 +29,7 @@ public class PartitioningBlocker<RecordType extends Matchable> extends Blocker<R
 	public List<Pair<RecordType, RecordType>> generatePairs(DataSet<RecordType> dataset1,
 			DataSet<RecordType> dataset2) {
 		List<Pair<RecordType, RecordType>> result = new LinkedList<>();
-		
+//start windowing
 		//sort dataset1
 		int m1 = 1;
 		TreeMap<Double, RecordType> treemap1 = new TreeMap<Double, RecordType>();
@@ -65,7 +65,7 @@ public class PartitioningBlocker<RecordType extends Matchable> extends Blocker<R
 	
 		//check pairs
 		int arrayIndex = 0;
-		int halfWindowSize = 40;
+		int halfWindowSize = 15;
 		int sameDatasetCounter = 0;
 		ArrayList<Double> treeSetArray = new ArrayList<Double>(treeSetBoth);
 		
@@ -97,7 +97,7 @@ public class PartitioningBlocker<RecordType extends Matchable> extends Blocker<R
 			RecordType r1 = treemap1.get(key1);
 			arrayIndex = treeSetArray.indexOf(key1);
 		   
-			   for (int j = arrayIndex; j > arrayIndex - halfWindowSize - sameDatasetCounter; j--) {	   
+			   for (int j = arrayIndex; j > arrayIndex - halfWindowSize + sameDatasetCounter; j--) {	   
 				   if (j>0) {
 					   Double key2 = treeSetArray.get(j);
 					   
@@ -111,7 +111,9 @@ public class PartitioningBlocker<RecordType extends Matchable> extends Blocker<R
 			   }
 			}
 		}
+//end windowing		
 		
+////start partitioning
 //		for(RecordType r1 : dataset1.getRecords()) {
 //			String key1 = blockingFunction.getBlockingKey(r1);
 //			for(RecordType r2 : dataset2.getRecords()) {
@@ -121,6 +123,7 @@ public class PartitioningBlocker<RecordType extends Matchable> extends Blocker<R
 //				}
 //			}
 //		}
+////end partitioning
 		
 		calculatePerformance(dataset1, dataset2, result);
 		
