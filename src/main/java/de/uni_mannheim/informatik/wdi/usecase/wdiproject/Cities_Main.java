@@ -3,24 +3,14 @@ package de.uni_mannheim.informatik.wdi.usecase.wdiproject;
 import de.uni_mannheim.informatik.wdi.DataSet;
 import de.uni_mannheim.informatik.wdi.identityresolution.blocking.Blocker;
 import de.uni_mannheim.informatik.wdi.identityresolution.blocking.PartitioningBlocker;
-import de.uni_mannheim.informatik.wdi.identityresolution.evaluation.GoldStandard;
-import de.uni_mannheim.informatik.wdi.identityresolution.evaluation.MatchingEvaluator;
-import de.uni_mannheim.informatik.wdi.identityresolution.evaluation.Performance;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.Correspondence;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.LinearCombinationMatchingRule;
 import de.uni_mannheim.informatik.wdi.identityresolution.matching.MatchingEngine;
-import de.uni_mannheim.informatik.wdi.identityresolution.model.DefaultRecord;
-import de.uni_mannheim.informatik.wdi.identityresolution.model.DefaultRecordCSVFormatter;
-import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityLocationComparator;
-import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparator;
 import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityNameComparatorJaro;
-import de.uni_mannheim.informatik.wdi.usecase.wdiproject.comparators.CityPopulationComparator;
-
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -36,11 +26,11 @@ public class Cities_Main {
 		// define the matching rule
 		
 		//geonames2maxmind rapidminer weights
-		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.544, -0.35); //rapidminer offset
+		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(0, 1); //rapidminer offset
 //		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.36, 0); //updated offset
-		rule.addComparator(new CityNameComparatorJaro(), 0.697);
-		rule.addComparator(new CityLocationComparator(), 0.651);
-		rule.addComparator(new CityPopulationComparator(), 0.217);
+		rule.addComparator(new CityNameComparatorJaro(), 1);
+//		rule.addComparator(new CityLocationComparator(), 0.651);
+//		rule.addComparator(new CityPopulationComparator(), 0.217);
 		
 //		//geonames2dbpCity rapidminer weights
 //		LinearCombinationMatchingRule<City> rule = new LinearCombinationMatchingRule<>(-1.148, -0.258); //rapidminer offset
@@ -67,48 +57,48 @@ public class Cities_Main {
 		MatchingEngine<City> engine = new MatchingEngine<>(rule, blocker);
 
 		// load the data sets
-		DataSet<City> geonames = new DataSet<>();
-		DataSet<City> maxmind = new DataSet<>();
-		DataSet<City> dbpCity = new DataSet<>();
+//		DataSet<City> geonames = new DataSet<>();
+//		DataSet<City> maxmind = new DataSet<>();
+//		DataSet<City> dbpCity = new DataSet<>();
 		DataSet<City> fusedCities = new DataSet<>();
 		DataSet<City> musicians = new DataSet<>();
 
 
-		geonames.loadFromXML(new File("usecase/wdiproject/input/geonames.xml"), new CityFactory(), "/cities/city");
-		maxmind.loadFromXML(new File("usecase/wdiproject/input/maxmind.xml"), new CityFactory(), "/cities/city");
-		dbpCity.loadFromXML(new File("usecase/wdiproject/input/cities_v3.xml"), new CityFactory(), "/cities/city");
-		fusedCities.loadFromXML(new File("usecase/wdiproject/input/fusedCities_draft.xml"), new CityFactory(), "/cities/city");
-//		musicians.loadFromXML(new File("usecase/wdiproject/input/musicians_v6_poc.xml"), new CityFactory(),"/cities/city");
+//		geonames.loadFromXML(new File("usecase/wdiproject/input/geonames.xml"), new CityFactory(), "/cities/city");
+//		maxmind.loadFromXML(new File("usecase/wdiproject/input/maxmind.xml"), new CityFactory(), "/cities/city");
+//		dbpCity.loadFromXML(new File("usecase/wdiproject/input/cities_v3.xml"), new CityFactory(), "/cities/city");
+		fusedCities.loadFromXML(new File("usecase/wdiproject/input/fused.xml"), new CityFactory(), "/cities/city");
+		musicians.loadFromXML(new File("usecase/wdiproject/input/musicians_v10_cc.xml"), new CityFactory(),"/cities/city");
 		
 		// run the matching
-		List<Correspondence<City>> correspondences = engine.runMatching(geonames, maxmind);
+//		List<Correspondence<City>> correspondences = engine.runMatching(geonames, maxmind);
 //		List<Correspondence<City>> correspondences = engine.runMatching(geonames, dbpCity);
 //		List<Correspondence<City>> correspondences = engine.runMatching(maxmind, dbpCity);
-//		List<Correspondence<City>> correspondences = engine.runMatching(fusedCities, musicians);
+		List<Correspondence<City>> correspondences = engine.runMatching(fusedCities, musicians);
 
 
 		
 		// write the correspondences to the output file
 		engine.writeCorrespondences(correspondences,
-				new File("usecase/wdiproject/output/geonames2maxmind_correspondences_rm_weights.csv"));
+//				new File("usecase/wdiproject/output/geonames2maxmind_correspondences_rm_weights.csv"));
 //				new File("usecase/wdiproject/output/geonames2dbpedia_correspondences_rm_weights.csv"));
 //				new File("usecase/wdiproject/output/maxmind2dbpedia_correspondences_rm_weights.csv"));
-//				new File("usecase/wdiproject/output/musicians2fusedCities_correspondences.csv"));
+				new File("usecase/wdiproject/output/musicians2fused_correspondences.csv"));
 
 		//printCorrespondences(correspondences);
 
 		// load the gold standard (training set)
-		GoldStandard gsTraining = new GoldStandard();
-		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2maxmind.csv"));
+//		GoldStandard gsTraining = new GoldStandard();
+//		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2maxmind.csv"));
 //		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_geonames2dbpedia.csv"));
 //		gsTraining.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/gs_maxmind2dbpedia.csv"));
 
 
 		// create the data set for learning a matching rule (use this file in
 		// RapidMiner)
-		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, maxmind, gsTraining);
-		features.writeCSV(new File("usecase/wdiproject/output/optimisation/rm_geonames2maxmind.csv"),
-				new DefaultRecordCSVFormatter());
+//		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, maxmind, gsTraining);
+//		features.writeCSV(new File("usecase/wdiproject/output/optimisation/rm_geonames2maxmind.csv"),
+//				new DefaultRecordCSVFormatter());
 //		DataSet<DefaultRecord> features = engine.generateTrainingDataForLearning(geonames, dbpCity, gsTraining);
 //		features.writeCSV(new File("usecase/wdiproject/output/optimisation/rm_geonames2dbpedia.csv"),
 //				new DefaultRecordCSVFormatter());
@@ -121,12 +111,12 @@ public class Cities_Main {
 //		gsTest.loadFromCSVFile(new File("usecase/wdiproject/goldstandard/geonames2maxmind_correspondences.csv"));
 
 		// evaluate the result
-		MatchingEvaluator<City> evaluator = new MatchingEvaluator<>(true);
-		Performance perfTest = evaluator.evaluateMatching(correspondences, gsTraining);
+//		MatchingEvaluator<City> evaluator = new MatchingEvaluator<>(true);
+//		Performance perfTest = evaluator.evaluateMatching(correspondences, gsTraining);
 
 		// print the evaluation result
-		System.out.println(String.format("Precision: %.4f\nRecall: %.4f\nF1: %.4f", perfTest.getPrecision(),
-				perfTest.getRecall(), perfTest.getF1()));
+//		System.out.println(String.format("Precision: %.4f\nRecall: %.4f\nF1: %.4f", perfTest.getPrecision(),
+//				perfTest.getRecall(), perfTest.getF1()));
 
 	}
 

@@ -1,7 +1,6 @@
 package de.uni_mannheim.informatik.wdi.usecase.wdiproject;
 
 import de.uni_mannheim.informatik.wdi.MatchableFactory;
-import org.joda.time.DateTime;
 import org.w3c.dom.Node;
 
 /**
@@ -19,17 +18,12 @@ public class MusicianFactory extends MatchableFactory<Musician> {
         // fill the attributes
         musician.setFirstName(getValueFromChildElement(node, "firstname"));
         musician.setLastName(getValueFromChildElement(node, "lastname"));
-
-        // convert the date string into a DateTime object
-        try {
-            String date = getValueFromChildElement(node, "date");
-            if(date!=null && !date.isEmpty()) {
-                DateTime dt = DateTime.parse(date);
-                musician.setBirthDate(dt);
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        musician.setBirthPlace(getValueFromChildElement(node, "name"));
+        musician.setAssociatedBand(getValueFromChildElement(node, "associatedBand"));
+        musician.setBackground(getValueFromChildElement(node, "background"));
+        musician.setGenre(getValueFromChildElement(node, "genre"));
+        musician.setInstrument(getValueFromChildElement(node, "instrument"));
+//        musician.setBirthDate(getValueFromChildElement(node, "birthDate"));
 
         return musician;
     }
